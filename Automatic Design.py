@@ -22,6 +22,7 @@ x1=x0+buttonWidth
 y0=400
 y1=y0+buttonHeight
 
+category = '电子数码'
 
 wb = openpyxl.load_workbook('/Users/moqu/Downloads/素材库1.0/需求/素材需求0410.xlsx')
 sheet = wb['Sheet1']
@@ -49,10 +50,20 @@ def watermark():
         draw.rectangle([(x0, y0), (x1, y1)], fillColor,outlineColor)
         draw.text((160, 400), buttonText, fill=(0, 0, 0), font=buttonfont)
 
+        '''
+        commodity_box = (img.size/2,img.size/2-150,300,300)
+        for commodity_img in glob.glob('/Users/moqu/Downloads/素材库1.0/分类/商品1.1/'+category+'/*.png'):
+            commodity_img_
+            img.paste(commodity_img,commodity_box,commodity_img)
+        '''
+        commodity_img = Image.open('/Users/moqu/Downloads/素材库1.0/分类/商品1.1/电子数码/电子数码001.png')
+        commodity_region = commodity_img
+        commodity_region = commodity_region.convert("RGBA")
+        commodity_region.thumbnail((300,200))
+        img.paste(commodity_region,(800,200),commodity_region)
+
         logo_img = Image.open(r'/Users/moqu/Downloads/素材库1.0/Logo/Lazada_Group_Logo.png')
         box = (img.size[0] - 300, img.size[1] - 200,img.size[0], img.size[1])
-
-
         region = logo_img
         region = region.convert("RGBA")
         region = region.resize((box[2] - box[0], box[3] - box[1]))
