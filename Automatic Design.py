@@ -12,7 +12,7 @@ subtitle = u'Subtitle'
 buttonText = u'DOWNLOAD'
 
 buttonHeight = 40
-buttonWidth = 160
+buttonWidth = 280
 
 fillColor = (255,255,255)
 outlineColor = (255,255,255)
@@ -29,9 +29,9 @@ sheet = wb['Sheet1']
 def watermark():
     i=2
     for files in glob.glob('/Users/moqu/Downloads/imglib/*.png'):
-        chfont = ImageFont.truetype('/Library/Fonts/_H_HelveticaNeue.ttc',72)
-        enfont = ImageFont.truetype('/Library/Fonts/_H_HelveticaNeue.ttc',48)
-        buttonfont = ImageFont.truetype('/Library/Fonts/_H_HelveticaNeue.ttc',24)
+        chfont = ImageFont.truetype('/Library/Fonts/Tahoma.ttf',72)
+        enfont = ImageFont.truetype('/Library/Fonts/Tahoma.ttf',48)
+        buttonfont = ImageFont.truetype('/Library/Fonts/Tahoma.ttf',24)
         img = Image.open(files)
 
        # target = Image.new('RGBA', img.size, (0, 0, 0, 0))
@@ -50,7 +50,7 @@ def watermark():
         draw.text((160, 400), buttonText, fill=(0, 0, 0), font=buttonfont)
 
         logo_img = Image.open(r'/Users/moqu/Downloads/素材库1.0/Logo/Lazada_Group_Logo.png')
-        box = (img.size[0] - 200, img.size[1] - 200,img.size[0], img.size[1])
+        box = (img.size[0] - 300, img.size[1] - 200,img.size[0], img.size[1])
 
 
         region = logo_img
@@ -70,6 +70,10 @@ def watermark():
 
 if __name__=='__main__':
     watermark()
+
+
+
+
 
 
 
