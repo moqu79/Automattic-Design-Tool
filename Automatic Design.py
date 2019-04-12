@@ -45,7 +45,7 @@ def watermark():
         region = region.convert("RGBA")
         region = region.resize((box[2] - box[0], box[3] - box[1]))
 
-        img.paste(region, (0, 0), region)
+        img.paste(region, box, region)
 
         dir = "/Users/moqu/Downloads/Outputfolder/"
         name = datetime.datetime.now().strftime("%Y%m%d%H%M%S")
