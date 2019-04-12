@@ -61,7 +61,8 @@ def watermark():
 
         dir = "/Users/moqu/Downloads/Outputfolder/"
         name = datetime.datetime.now().strftime("%Y%m%d%H%M%S")
-        filename = dir + name + '_result.png'
+      # filename = dir + name + '_result.png'
+        filename = dir + sheet.cell(row=i, column=3).value+'.png'
         sleep(1)
         img.save(filename)
         print (filename+" Done!")
