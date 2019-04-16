@@ -32,7 +32,7 @@ def watermark():
     for files in glob.glob('/Users/moqu/Downloads/imglib/*.png'):
         chfont = ImageFont.truetype('/Library/Fonts/Tahoma.ttf',72)
         enfont = ImageFont.truetype('/Library/Fonts/Tahoma.ttf',48)
-        buttonfont = ImageFont.truetype('/Library/Fonts/Tahoma.ttf',24)
+        buttonfont = ImageFont.truetype('/Library/Fonts/Tahoma.ttf',32)
         img = Image.open(files)
 
        # target = Image.new('RGBA', img.size, (0, 0, 0, 0))
@@ -42,14 +42,28 @@ def watermark():
         title = str(result_list[0])
         subtitle = str(result_list[1])
         buttonText = str(result_list[2])
+        language = sheet.cell(row=i,column=1).value
 
         draw = ImageDraw.Draw(img)
         draw.text((img.size[0] - 1060, img.size[1] - 416), title, fill=(255, 100, 100), font=chfont)
         draw.text((img.size[0] - 1060, img.size[1] - 420), title, fill=(255, 255, 255), font=chfont)
         draw.text((img.size[0] - 1060, img.size[1] - 320), subtitle, fill=(255, 255, 255), font=enfont)
-        draw.rectangle([(x0, y0), (x1, y1)], fillColor,outlineColor)
-        draw.text((160, 400), buttonText, fill=(0, 0, 0), font=buttonfont)
 
+        if(language == 'TH'):# Mid Width
+            button_img = Image.open('/Users/moqu/Downloads/素材库1.0/按钮/RoundedRect.png').convert("RGBA")
+            button_img.resize((1600,120)) # Button大小
+            img.paste(button_img,(160,400),button_img)
+
+        elif(language == 'PH'):
+            button_img = Image.open('/Users/moqu/Downloads/素材库1.0/按钮/XLargeRoundedRect.png').convert("RGBA")
+            button_img.resize((1600,120)) # Button大小
+            img.paste(button_img,(160,400),button_img)
+        else:
+            button_img = Image.open('/Users/moqu/Downloads/素材库1.0/按钮/LargeRoundedRect.png').convert("RGBA")
+            button_img.resize((1600, 120))  # Button大小
+            img.paste(button_img, (160, 400), button_img)
+
+        draw.text((200, 400), buttonText, fill=(255, 255, 255), font=buttonfont)
         '''
         commodity_box = (img.size/2,img.size/2-150,300,300)
         for commodity_img in glob.glob('/Users/moqu/Downloads/素材库1.0/分类/商品1.1/'+category+'/*.png'):
@@ -82,10 +96,3 @@ def watermark():
 
 if __name__=='__main__':
     watermark()
-
-
-
-
-
-
-
