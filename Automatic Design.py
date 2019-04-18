@@ -50,9 +50,10 @@ def watermark():
             for filepath in filenames:
                 ls.append(elementsfolder+filepath)
         #print(ls)
-        rs = random.sample(range(1,len(ls)),3)
+        rs = random.sample(range(1,len(ls)-1),3)
         for cornermark in rs:
-            print (cornermark)
+            outputimg = ls[cornermark]
+            print (outputimg)
         #print(elementsfolder)
 
 
