@@ -44,7 +44,7 @@ def watermark():
         buttonText = str(result_list[2])
         language = sheet.cell(row=i,column=1).value
         elements = sheet.cell(row=i,column=10).value
-        elementsfolder = '/Users/moqu/Desktop/广告平台/垃圾堆/商品1.1/'+elements
+        elementsfolder = '/Users/moqu/Desktop/广告平台/垃圾堆/商品1.1/'+elements+'/'
         ls = []
         for dirpath, dirnames, filenames in os.walk(elementsfolder):
             for filepath in filenames:
@@ -52,10 +52,15 @@ def watermark():
         #print(ls)
         rs = random.sample(range(1,len(ls)-1),3)
         for cornermark in rs:
-            outputimg = ls[cornermark]
-            print (outputimg)
-        #print(elementsfolder)
+            commodity_single_img = ls[cornermark]
+            print (commodity_single_img)
+            commodity_single_img = Image.open(commodity_single_img)
+            commodity_region = commodity_single_img
+            commodity_region = commodity_region.convert("RGBA")
+            commodity_region.thumbnail((300, 200))
+            img.paste(commodity_region, (800+random.randint(-100,100), 200+random.randint(-50,50)), commodity_region)
 
+        #print(elementsfolder)
 
         draw = ImageDraw.Draw(img)
         draw.text((img.size[0] - 1060, img.size[1] - 416), title, fill=(255, 100, 100), font=chfont)
@@ -83,11 +88,14 @@ def watermark():
             commodity_img_
             img.paste(commodity_img,commodity_box,commodity_img)
         '''
+
+        '''
         commodity_img = Image.open('/Users/moqu/Downloads/素材库1.0/分类/商品1.1/电子数码/电子数码001.png')
         commodity_region = commodity_img
         commodity_region = commodity_region.convert("RGBA")
         commodity_region.thumbnail((300,200))
         img.paste(commodity_region,(800,200),commodity_region)
+        '''
 
         logo_img = Image.open(r'/Users/moqu/Downloads/素材库1.0/Logo/Lazada_Group_Logo.png')
         box = (img.size[0] - 300, img.size[1] - 200,img.size[0], img.size[1])
