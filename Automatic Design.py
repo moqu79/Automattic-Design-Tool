@@ -1,3 +1,4 @@
+import os
 import datetime
 import glob
 from time import sleep
@@ -6,6 +7,7 @@ from PIL import ImageDraw
 from PIL import ImageFont
 from colour import Color
 import openpyxl
+import random
 
 title = u'Title of poster'
 subtitle = u'Subtitle'
@@ -35,14 +37,24 @@ def watermark():
         buttonfont = ImageFont.truetype('/Library/Fonts/Tahoma.ttf',32)
         img = Image.open(files)
 
-       # target = Image.new('RGBA', img.size, (0, 0, 0, 0))
-
         result = sheet.cell(row=i, column=6).value
         result_list = result.split("\n")
         title = str(result_list[0])
         subtitle = str(result_list[1])
         buttonText = str(result_list[2])
         language = sheet.cell(row=i,column=1).value
+        elements = sheet.cell(row=i,column=10).value
+        elementsfolder = '/Users/moqu/Desktop/广告平台/垃圾堆/商品1.1/'+elements
+        ls = []
+        for dirpath, dirnames, filenames in os.walk(elementsfolder):
+            for filepath in filenames:
+                ls.append(elementsfolder+filepath)
+        #print(ls)
+        rs = random.sample(range(1,len(ls)),3)
+        for cornermark in rs:
+            print (cornermark)
+        #print(elementsfolder)
+
 
         draw = ImageDraw.Draw(img)
         draw.text((img.size[0] - 1060, img.size[1] - 416), title, fill=(255, 100, 100), font=chfont)
