@@ -31,6 +31,7 @@ sheet = wb['Sheet1']
 
 def watermark():
     i=2
+
     for files in glob.glob('/Users/moqu/Downloads/imglib/*.png'):
         chfont = ImageFont.truetype('/Library/Fonts/Tahoma.ttf',72)
         enfont = ImageFont.truetype('/Library/Fonts/Tahoma.ttf',48)
@@ -50,7 +51,10 @@ def watermark():
             for filepath in filenames:
                 ls.append(elementsfolder+filepath)
         #print(ls)
-        rs = random.sample(range(1,len(ls)-1),3)
+
+        rs = random.sample(range(1,len(ls)-1),4)
+        offsets = [(750, 100), (950, 100), (750, 300), (950, 300)]
+        index = 0
         for cornermark in rs:
             commodity_single_img = ls[cornermark]
             print (commodity_single_img)
@@ -58,7 +62,10 @@ def watermark():
             commodity_region = commodity_single_img
             commodity_region = commodity_region.convert("RGBA")
             commodity_region.thumbnail((300, 200))
-            img.paste(commodity_region, (800+random.randint(-100,100), 200+random.randint(-50,50)), commodity_region)
+            offset = offsets[index]
+            index = index + 1
+
+            img.paste(commodity_region,offset, commodity_region)
 
         #print(elementsfolder)
 
