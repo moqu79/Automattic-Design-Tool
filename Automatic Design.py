@@ -33,6 +33,7 @@ def watermark():
     i=2
 
     for files in glob.glob('/Users/moqu/Downloads/imglib/*.png'):
+
         chfont = ImageFont.truetype('/Library/Fonts/Tahoma.ttf',72)
         enfont = ImageFont.truetype('/Library/Fonts/Tahoma.ttf',48)
         buttonfont = ImageFont.truetype('/Library/Fonts/Tahoma.ttf',32)
@@ -56,16 +57,25 @@ def watermark():
         offsets = [(750, 100), (950, 100), (750, 300), (950, 300)]
         index = 0
         for cornermark in rs:
+
             commodity_single_img = ls[cornermark]
             print (commodity_single_img)
-            commodity_single_img = Image.open(commodity_single_img)
-            commodity_region = commodity_single_img
-            commodity_region = commodity_region.convert("RGBA")
-            commodity_region.thumbnail((300, 200))
-            offset = offsets[index]
-            index = index + 1
 
-            img.paste(commodity_region,offset, commodity_region)
+            file = os.path.splitext(commodity_single_img)
+            filename,type = file
+            print (type)
+            if(type == '.png'):
+
+                commodity_single_img = Image.open(commodity_single_img)
+                commodity_region = commodity_single_img
+                commodity_region = commodity_region.convert("RGBA")
+                commodity_region.thumbnail((300, 200))
+                offset = offsets[index]
+                index = index + 1
+
+                img.paste(commodity_region,offset, commodity_region)
+            else:
+                return
 
         #print(elementsfolder)
 
@@ -113,7 +123,7 @@ def watermark():
         img.paste(region, box, region)
 
         dir = "/Users/moqu/Downloads/Outputfolder/"
-        name = datetime.datetime.now().strftime("%Y%m%d%H%M%S")
+      # name = datetime.datetime.now().strftime("%Y%m%d%H%M%S")
       # filename = dir + name + '_result.png'
         filename = dir + sheet.cell(row=i, column=3).value+'.png'
         sleep(1)
